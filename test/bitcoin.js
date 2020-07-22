@@ -1,10 +1,10 @@
+/*
 const { randomBytes } = require('crypto');
 const secp256k1 = require('secp256k1/elliptic');
 const sha256 = require('sha256');
 const ByteBuffer = require('bytebuffer');
 const bs58 = require('bs58');
 const RIPEMD160 = require('ripemd160');
-const crypto = require('crypto');
 
 //n-1.1578*10**77
 //console.log(msg);
@@ -15,18 +15,18 @@ const wifByte = Buffer.alloc(1, 0x80);
 let privKeyHex;
 let privKeyByte;
 do {
-    privKeyHex  = sha256('a');
-    privKeyByte = Buffer.from(privKeyHex, 'hex');
-}while(!secp256k1.privateKeyVerify((privKeyByte)));
+    privKeyHex  = sha256('a'); // get a sha256 hash value from a string of your choice
+    privKeyByte = Buffer.from(privKeyHex, 'hex'); // convert a hex value to bytes (=>32 bytes)
+}while(!secp256k1.privateKeyVerify((privKeyByte))); // check if the value is less than
 
 let pubKey = secp256k1.publicKeyCreate(privKeyByte);
-let wifBufPriv = Buffer.concat([wifByte, privKeyByte],wifByte.length+privKeyByte.length)
+let wifBufPriv = Buffer.concat([wifByte, privKeyByte],wifByte.length+privKeyByte.length);
 let wifHashFirst = sha256(wifBufPriv);
 let wifHashSecond = Buffer.from(sha256(wifHashFirst), 'hex');
 let wifHashSig = wifHashSecond.slice(0,4);
 let wifBuf = Buffer.concat([wifBufPriv, wifHashSig], wifBufPriv.length + wifHashSig.length);
 let wifFinal = bs58.encode(wifBuf);
-/*************************************************/
+/!*************************************************!/
 let publicKeyInitialHash = sha256(Buffer.from(pubKey, 'hex'));
 let publicKeyRIPEHash = new RIPEMD160().update(Buffer.from(publicKeyInitialHash, 'hex')).digest('hex');
 let hashBuffer = Buffer.from(publicKeyRIPEHash, 'hex');
@@ -41,4 +41,4 @@ let bitcoinAddress = bs58.encode(Buffer.from(bitcoinBinaryStr));
 console.log(bitcoinWifAddress)
 console.log('private key', wifFinal);
 console.log('address', bitcoinAddress);
-console.log('address2', bitcoinWifAddress)
+console.log('address2', bitcoinWifAddress);*/
