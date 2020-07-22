@@ -6,10 +6,6 @@ const bs58 = require('bs58');
 const RIPEMD160 = require('ripemd160');
 const crypto = require('crypto');
 
-function hasha256(data) {
-    return crypto.createHash('sha256').update(data).digest();
-
-}
 //n-1.1578*10**77
 //console.log(msg);
 
